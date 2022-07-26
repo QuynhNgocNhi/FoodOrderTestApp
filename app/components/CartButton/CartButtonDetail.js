@@ -4,13 +4,14 @@ import { ImageBackground, StyleSheet, View, Text, TouchableOpacity, Image } from
 import Colors from '../../theme/colors';
 //import Icon
 import { Icon } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 
 const CartButtonDetail = () => {
-
+    const navigation = useNavigation();
     return (
 
 
-        <View style={styles.productItemContainer}>
+        <TouchableOpacity onPress={() => { navigation.navigate('CartScreen'); }} style={styles.productItemContainer}>
             <View style={styles.Icon}>
 
                 <Icon
@@ -27,7 +28,7 @@ const CartButtonDetail = () => {
                     (2 item): $57
                 </Text>
             </View>
-        </View>
+        </TouchableOpacity>
 
 
 
