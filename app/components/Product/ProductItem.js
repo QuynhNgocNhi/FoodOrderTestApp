@@ -12,7 +12,7 @@ const ProductItem = ({ product }) => {
                 style={{
 
                 }}>
-                <View style={styles.productImage}>
+                <View style={styles.productItem}>
 
                     <Image style={{
                         resizeMode: "cover",
@@ -21,10 +21,12 @@ const ProductItem = ({ product }) => {
                         borderBottomLeftRadius: 10,
                         borderTopLeftRadius: 10,
 
-                    }} source={{ uri: product.image }} />
+                    }} source={product.image ? ({ uri: product.image }) : require('../../assets/image/no-image.png')} />
 
 
-                    <ImageBackground imageStyle={{ borderBottomRightRadius: 10, borderTopRightRadius: 10, opacity: 0.2, }} source={{ uri: product.image }} style={styles.productInforContainer}>
+                    <ImageBackground imageStyle={{ borderBottomRightRadius: 10, borderTopRightRadius: 10, opacity: 0.2, }}
+                        source={product.image ? ({ uri: product.image }) : require('../../assets/image/no-image.png')}
+                        style={styles.productInforContainer}>
 
                         <View style={styles.productInfor}>
 
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
 
 
     },
-    productImage: {
+    productItem: {
         flexDirection: 'row',
         alignSelf: 'center',
         borderRadius: 10,

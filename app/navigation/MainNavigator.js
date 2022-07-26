@@ -11,6 +11,7 @@ function MainNavigator() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
+                <Stack.Screen name="CartScreen" component={Cart} options={{ headerShown: false }} />
                 <Stack.Screen name="MenuScreen" component={Menu} options={({ navigation }) => ({
                     title: 'Category',
                     headerTitleAlign: 'center',
@@ -18,7 +19,6 @@ function MainNavigator() {
                         //delete underline
                     }
                 })} />
-                <Stack.Screen name="CartScreen" component={Cart} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     );
