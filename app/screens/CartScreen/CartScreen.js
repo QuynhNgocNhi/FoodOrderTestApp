@@ -1,13 +1,20 @@
-import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
+// import colors
+import Colors from '../../theme/colors';
+//import data
+import sample_data from '../../config/sampleData';
+
 function Cart() {
     return (
-        <View style={styles.container}>
-            <Text style={styles.red}>just red</Text>
-            <Text style={styles.bigBlue}>just bigBlue</Text>
-            <Text style={[styles.bigBlue, styles.red]}>bigBlue, then red</Text>
-            <Text style={[styles.red, styles.bigBlue]}>red, then bigBlue</Text>
-        </View>
+        <SafeAreaProvider>
+            <SafeAreaView style={styles.screenContainer}>
+                <View style={styles.container}>
+
+                </View>
+            </SafeAreaView>
+        </SafeAreaProvider>
     );
 }
 const styles = StyleSheet.create({
