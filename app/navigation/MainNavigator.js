@@ -40,6 +40,9 @@ function MainNavigator() {
                             size={25}
                         />
                     ),
+                    headerStyle: {
+                        backgroundColor: Colors.primaryColor
+                    }
                 })} />
             </Stack.Navigator>
         </NavigationContainer>

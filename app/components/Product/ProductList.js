@@ -4,11 +4,7 @@ import { StyleSheet, FlatList, View, Text, TouchableOpacity } from 'react-native
 import Colors from '../../theme/colors';
 import ProductItem from '../../components/Product/ProductItem'
 
-export default function CustomSwitch({
-
-    products
-
-}) {
+export default function CustomSwitch({ products }) {
 
     return (
 
@@ -37,7 +33,7 @@ export default function CustomSwitch({
 const styles = StyleSheet.create({
     productList: {
         width: '100%',
-        paddingBottom: 20
+
     },
 
 });

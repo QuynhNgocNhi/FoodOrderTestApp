@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     productItemContainer: {
         height: 55,
         position: 'absolute',
-        bottom: 0,
+        bottom: 10,
         width: '80%',
         alignSelf: 'center',
         borderWidth: 3,

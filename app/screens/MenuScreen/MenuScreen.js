@@ -22,8 +22,6 @@ function Menu() {
 
     return (
         <SafeAreaProvider>
-
-
             <SafeAreaView style={styles.screenContainer}>
                 <View style={styles.container}>
                     <View style={styles.categoryList}>
@@ -34,7 +32,7 @@ function Menu() {
                         />
 
                     </View>
-                    <View style={styles.hairline} />
+                    <View style={styles.Hairline} />
                     <View style={styles.productList}>
                         <ProductList products={currentProductList.items} />
                     </View>
@@ -52,13 +50,13 @@ function Menu() {
 const styles = StyleSheet.create({
     screenContainer: {
         flex: 1,
-        backgroundColor: Colors.background,
+
     },
     container: {
         flex: 1,
         backgroundColor: Colors.background,
     },
-    hairline: {
+    Hairline: {
         backgroundColor: Colors.borderColor,
         height: 2,
         width: '90%',

@@ -6,8 +6,8 @@ const themes = {
     food: {
 
         // primary color
+        primaryColor: "#f7e2be",
         primaryLightColor: "#bc00218c",
-        primaryColor: "#bc0021",//00b970//bc0021
         primaryColorDark: "#00945a",
         primaryColorLight: "#00e78c",
         onPrimaryColor: "#ffffff",//
@@ -25,6 +25,7 @@ const themes = {
         // border color
         borderColorActive: "#B5E9BA",
         borderColor: "#d1d1d1",
+        borderColorDark: "#757575",
 
         // secondary color, primary color split
         secondaryColor: "#b90039",
@@ -58,7 +59,8 @@ const themes = {
         onError: "#fff",
         black: "#010203",
         white: "#fff",
-        red: "#D40000"
+        red: "#D40000",
+        green: "#007537"
     }
 };
 

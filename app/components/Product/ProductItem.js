@@ -48,7 +48,7 @@ const ProductItem = ({ product }) => {
 const styles = StyleSheet.create({
     productItemContainer: {
 
-        paddingBottom: 15
+        paddingBottom: 10
     },
 
     productInforContainer: {
