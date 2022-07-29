@@ -14,6 +14,8 @@ import CartButtonDetail from '../../components/CartButton/CartButtonDetail';
 //import API
 import { getMasterDataApi } from '../../services/api'
 
+// import redux hook
+import { useSelector } from 'react-redux';
 
 function Menu() {
     const [loading, setLoading] = useState(false)
@@ -22,6 +24,8 @@ function Menu() {
     const [CategoryTab, setCategoryTab] = useState(0)
     let currentProductList;
 
+    const productListSaga = useSelector((state) => state.productData);
+    console.log("productListSaga in menuscreen" + productListSaga)
     const dispatch = useDispatch()
     const fetchData = async () => {
         setLoading(true)

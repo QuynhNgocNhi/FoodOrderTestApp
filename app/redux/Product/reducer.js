@@ -5,7 +5,6 @@ export const productData = (data = [], action) => {
     switch (action.type) {
         case GET_PRODUCT_LIST:
             console.log('GET_PRODUCT_LIST reducer', action);
-
             return [action.data]
 
         default:
