@@ -1,24 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View, ActivityIndicator } from 'react-native';
+import { useDispatch } from 'react-redux';
+
 // import colors
 import Colors from '../../theme/colors';
-//import data
-import sample_data from '../../config/sampleData';
+
 //import components
 import CustomSwitch from '../../components/Category/CategoryList'
 import ProductList from '../../components/Product/ProductList'
 import CartButtonDetail from '../../components/CartButton/CartButtonDetail';
-function Menu() {
 
-    const [Category, setCategory] = useState(sample_data)
-    const [CategoryTab, setCategoryTab] = useState(Category[0].id);
+//import API
+import { getMasterDataApi } from '../../services/api'
+
+
+function Menu() {
+    const [loading, setLoading] = useState(false)
+    const [productList, setProductList] = useState([])
+    const [Category, setCategory] = useState([])
+    const [CategoryTab, setCategoryTab] = useState(0)
+    let currentProductList;
+
+    const dispatch = useDispatch()
+    const fetchData = async () => {
+        setLoading(true)
+
+        const response = await getMasterDataApi()
+        if (response.__typename !== 'ErrorResponse') {
+            setCategory(response)
+            let firstCategory = response[0]
+            setCategoryTab(firstCategory.id)
+            setProductList(firstCategory.items);
+
+        }
+
+        setLoading(false)
+    }
+
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+
     const onSelectSwitch = value => {
         setCategoryTab(value);
+        currentProductList = Category.find(obj => {
+            return obj.id === value;
+        })
+        console.log("currentProductList " + currentProductList.id)
+        setProductList(currentProductList.items);
     };
-    const currentProductList = Category.find(obj => {
-        return obj.id === CategoryTab;
-    });
+
+    if (loading) {
+        return (<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <ActivityIndicator animating />
+        </View>)
+    }
 
     return (
         <SafeAreaProvider>
@@ -26,7 +65,7 @@ function Menu() {
                 <View style={styles.container}>
                     <View style={styles.categoryList}>
                         <CustomSwitch
-                            selectionMode={Category[0].id}
+                            selectionMode={CategoryTab}
                             category={Category}
                             onSelectSwitch={onSelectSwitch}
                         />
@@ -34,7 +73,7 @@ function Menu() {
                     </View>
                     <View style={styles.Hairline} />
                     <View style={styles.productList}>
-                        <ProductList products={currentProductList.items} />
+                        <ProductList products={productList} />
                     </View>
 
                     <View style={styles.cartButton}>
@@ -44,6 +83,7 @@ function Menu() {
                 </View>
 
             </SafeAreaView>
+
         </SafeAreaProvider>
     );
 }

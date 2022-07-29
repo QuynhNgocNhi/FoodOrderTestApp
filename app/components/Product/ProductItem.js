@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
 import { ImageBackground, StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
+import { useDispatch } from 'react-redux';
 // import colors
 import Colors from '../../theme/colors';
+//import action
+import { addToCart } from '../../redux/Cart/action'
 
 const ProductItem = ({ product }) => {
-
+    const dispatch = useDispatch()
+    const productType = {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image
+    }
     return (
 
         <View style={styles.productItemContainer}>
             <TouchableOpacity
-                style={{
-
-                }}>
+                onPress={() => dispatch(addToCart(productType))}
+            >
                 <View style={styles.productItem}>
 
                     <Image style={{

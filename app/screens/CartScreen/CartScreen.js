@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { TouchableOpacity, FlatList, SafeAreaView, StyleSheet, View, Text } from 'react-native';
+
 // import colors
 import Colors from '../../theme/colors';
+
 //import data
 import sample_data from '../../config/sampleData';
+
 //import components
 import CartButton from '../../components/CartButton/CartButton';
 import ProductCheckoutItem from '../../components/ProductCheckoutItem/ProductCheckoutItem'
+
+// import redux hook
+import { useSelector } from 'react-redux';
+
 function Cart() {
     const [Products, setProducts] = useState(sample_data[1].items)
+    const cartDetail = useSelector((state) => state.cartData);
     return (
         <SafeAreaProvider>
             <SafeAreaView style={styles.screenContainer}>
@@ -43,7 +51,7 @@ function Cart() {
 
                         <View style={styles.bottomHeadline}>
                             <Text style={styles.Headline}>Total</Text>
-                            <Text style={styles.Headline}>3</Text>
+                            <Text style={styles.Headline}>{cartDetail.length}</Text>
                             <Text style={styles.Headline}>$ 57</Text>
                         </View>
                     </View>

@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
-import { ImageBackground, StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 // import colors
 import Colors from '../../theme/colors';
 //import Icon
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
+// import redux hook
+import { useSelector } from 'react-redux';
+
 
 const CartButtonDetail = () => {
     const navigation = useNavigation();
+    const cartDetail = useSelector((state) => state.cartData);
+
     return (
 
 
@@ -25,7 +30,7 @@ const CartButtonDetail = () => {
             <View style={styles.cartInfoContainer}>
 
                 <Text style={styles.cartInfo}>
-                    (2 item): $57
+                    ({cartDetail.length} item): $57
                 </Text>
             </View>
         </TouchableOpacity>

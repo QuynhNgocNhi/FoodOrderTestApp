@@ -4,17 +4,27 @@ import { ImageBackground, StyleSheet, View, Text, TouchableOpacity, Image } from
 import Colors from '../../theme/colors';
 //import components
 import { Icon } from 'react-native-elements';
-
+// import redux hook
+import { useDispatch, useSelector } from 'react-redux';
+//import action
+import { addToCart, removeFromCart } from '../../redux/Cart/action'
 
 const ProductItem = ({ product }) => {
-    const [Quantity, setQuantity] = useState(1);
+    /* const [Quantity, setQuantity] = useState(1);
     const addProduct = () => {
         console.log('plus' + product.name);
     }
     const removeProduct = () => {
         console.log('minus' + product.name);
+    } */
+    const cartDetail = useSelector((state) => state.cartData);
+    const dispatch = useDispatch()
+    const productType = {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image
     }
-
     return (
 
         <View style={styles.productItemContainer}>
@@ -22,7 +32,7 @@ const ProductItem = ({ product }) => {
             <Text numberOfLines={1} style={styles.productItemName}>{product.name}</Text>
             <View style={styles.manageQuantity}>
                 <Icon
-                    onPress={() => { removeProduct(); }}
+                    onPress={() => dispatch(removeFromCart(productType.id))}
                     name='minus'
                     type='feather'
                     color={Colors.red}
@@ -31,7 +41,7 @@ const ProductItem = ({ product }) => {
                 />
                 <Text style={styles.productItemQuantity}>1</Text>
                 <Icon
-                    onPress={() => { addQuantity(); }}
+                    onPress={() => dispatch(addToCart(productType.id))}
 
                     name='plus'
                     type='feather'
