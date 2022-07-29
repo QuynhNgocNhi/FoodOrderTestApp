@@ -8,15 +8,20 @@ import { useNavigation } from '@react-navigation/native';
 // import redux hook
 import { useSelector } from 'react-redux';
 
+//test api get product
+import { useDispatch } from 'react-redux';
+//import action
+import { fetchData } from '../../redux/Product/action'
 
 const CartButtonDetail = () => {
     const navigation = useNavigation();
     const cartDetail = useSelector((state) => state.cartData);
-
+    //test api get product
+    const dispatch = useDispatch()
     return (
 
 
-        <TouchableOpacity onPress={() => { navigation.navigate('CartScreen'); }} style={styles.productItemContainer}>
+        <TouchableOpacity onPress={() => dispatch(fetchData())} style={styles.productItemContainer}>
             <View style={styles.Icon}>
 
                 <Icon

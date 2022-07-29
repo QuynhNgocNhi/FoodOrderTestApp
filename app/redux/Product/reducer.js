@@ -4,9 +4,9 @@ export const productData = (data = [], action) => {
     console.log('Hello GET_PRODUCT_LIST reducer  ', data)
     switch (action.type) {
         case GET_PRODUCT_LIST:
-            console.log('GET_PRODUCT_LIST reducer', action.data);
+            console.log('GET_PRODUCT_LIST reducer', action);
 
-            return [action.data, ...data]
+            return [action.data]
 
         default:
             return data;

@@ -8,6 +8,6 @@ function* rootSaga() {
         cartSaga(),
         productSaga(),
     ]);
-    console.log('Root sage');
+
 }
 export default rootSaga;
