@@ -10,7 +10,6 @@ export default function CustomSwitch({
     onSelectSwitch,
 }) {
     const [getSelectionMode, setSelectionMode] = useState(selectionMode);
-    console.log("getSelectionMode: " + getSelectionMode);
     const updateSwitchData = value => {
         setSelectionMode(value);
         onSelectSwitch(value);

@@ -17,12 +17,8 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const sagaMiddleware = createSagaMiddleware();
 export const store = configureStore({
     reducer: rootReducer,
-    middleware: [
-        ...getDefaultMiddleware({
-            thunk: false,
-
-        }),
-        sagaMiddleware,
+    middleware: () => [
+        sagaMiddleware
     ],
 });
 

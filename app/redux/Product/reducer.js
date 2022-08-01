@@ -1,11 +1,13 @@
-import { GET_PRODUCT_LIST } from './type';
+import { GET_PRODUCT_LIST, SET_PRODUCT_LIST } from './type';
 // pass action data to reducer
 export const productData = (data = [], action) => {
-    console.log('Hello GET_PRODUCT_LIST reducer  ', data)
     switch (action.type) {
-        case GET_PRODUCT_LIST:
+        // no need this case cause we have the help of saga with this
+        /* case GET_PRODUCT_LIST:
             console.log('GET_PRODUCT_LIST reducer', action);
-            return [action.data]
+            return [action.data] */
+        case SET_PRODUCT_LIST:
+            return [...action.data]
 
         default:
             return data;

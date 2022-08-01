@@ -11,49 +11,46 @@ import CustomSwitch from '../../components/Category/CategoryList'
 import ProductList from '../../components/Product/ProductList'
 import CartButtonDetail from '../../components/CartButton/CartButtonDetail';
 
-//import API
-import { getMasterDataApi } from '../../services/api'
+//import action
+import { fetchData } from '../../redux/Product/action'
 
 // import redux hook
 import { useSelector } from 'react-redux';
 
 function Menu() {
+
     const [loading, setLoading] = useState(false)
     const [productList, setProductList] = useState([])
-    const [Category, setCategory] = useState([])
+    const data = useSelector((state) => state.productData);
+
     const [CategoryTab, setCategoryTab] = useState(0)
     let currentProductList;
 
-    const productListSaga = useSelector((state) => state.productData);
-    console.log("productListSaga in menuscreen" + productListSaga)
+    //const productListSaga = useSelector((state) => state.productData);
+    //console.log("productListSaga in menuscreen" + productListSaga)
     const dispatch = useDispatch()
-    const fetchData = async () => {
-        setLoading(true)
-
-        const response = await getMasterDataApi()
-        if (response.__typename !== 'ErrorResponse') {
-            setCategory(response)
-            let firstCategory = response[0]
-            setCategoryTab(firstCategory.id)
-            setProductList(firstCategory.items);
-
+    const setProductData = () => {
+        if (data.length > 0) {
+            setCategoryTab(data[0].id)
+            setProductList(data[0].items)
         }
 
-        setLoading(false)
     }
 
 
     useEffect(() => {
-        fetchData()
+        dispatch(fetchData())
     }, [])
+    useEffect(() => {
+        setProductData()
+    }, [data])
 
 
     const onSelectSwitch = value => {
         setCategoryTab(value);
-        currentProductList = Category.find(obj => {
+        currentProductList = data.find(obj => {
             return obj.id === value;
         })
-        console.log("currentProductList " + currentProductList.id)
         setProductList(currentProductList.items);
     };
 
@@ -62,7 +59,6 @@ function Menu() {
             <ActivityIndicator animating />
         </View>)
     }
-
     return (
         <SafeAreaProvider>
             <SafeAreaView style={styles.screenContainer}>
@@ -70,7 +66,7 @@ function Menu() {
                     <View style={styles.categoryList}>
                         <CustomSwitch
                             selectionMode={CategoryTab}
-                            category={Category}
+                            category={data}
                             onSelectSwitch={onSelectSwitch}
                         />
 
