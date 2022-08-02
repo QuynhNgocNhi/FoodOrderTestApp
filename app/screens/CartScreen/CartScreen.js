@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { TouchableOpacity, FlatList, SafeAreaView, StyleSheet, View, Text } from 'react-native';
 
 // import colors
 import Colors from '../../theme/colors';
 
-//import data
-import sample_data from '../../config/sampleData';
-
 //import components
 import CartButton from '../../components/CartButton/CartButton';
-import ProductCheckoutItem from '../../components/ProductCheckoutItem/ProductCheckoutItem'
+import ProductCheckoutItem from '../../components/ProductCheckoutItem/ProductCheckoutItem';
 
 // import redux hook
-import { useSelector, connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 const Cart = ({ cart, totalCount, totalAmount }) => {
     //const [cartDetail, setProducts] = useState(sample_data[1].items)
@@ -39,29 +36,14 @@ const Cart = ({ cart, totalCount, totalAmount }) => {
                                     product={item}
                                 />
                             </TouchableOpacity>)}
-                            {/* <FlatList
 
-                                data={cartDetail}
-                                showsHorizontalScrollIndicator={false}
-                                alwaysBounceHorizontal={false}
-                                keyExtractor={(item, index) => index.toString()}
-                                renderItem={({ item }) => (
-                                    <TouchableOpacity
-                                        activeOpacity={1}
-                                    >
-                                        <ProductCheckoutItem
-                                            product={item}
-                                        />
-                                    </TouchableOpacity>
-                                )}
-                            /> */}
                         </View>
                         <View style={styles.Hairline} />
 
                         <View style={styles.bottomHeadline}>
                             <Text style={styles.Headline}>Total</Text>
-                            <Text style={styles.Headline}>{totalCount}</Text>
-                            <Text style={styles.Headline}>$ {totalAmount}</Text>
+                            <Text style={styles.Headline}>{totalCount ? totalCount : 0}</Text>
+                            <Text style={styles.Headline}>$ {totalAmount ? totalAmount : 0}</Text>
                         </View>
                         <Text style={styles.Headline}></Text>
 

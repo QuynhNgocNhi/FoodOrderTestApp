@@ -29,7 +29,7 @@ const CartButtonDetail = () => {
             <View style={styles.cartInfoContainer}>
 
                 <Text style={styles.cartInfo}>
-                    ({cartDetail.currentItem} item): ${cartDetail.totalAmount}
+                    ({cartDetail.currentItem ? cartDetail.currentItem : 0} items): ${cartDetail.totalAmount ? cartDetail.totalAmount : 0}
                 </Text>
             </View>
         </TouchableOpacity>

@@ -17,11 +17,10 @@ export const addToCart = (data) => {
 
     }
 }
-
-export const removeFromCart = (data) => {
-    console.log('REMOVE_FROM_CART action called ' + data);
+export const decreaseQuantity = (data) => {
+    console.log('DECREASE_QUANTITY action called ' + data);
     return {
-        type: actionTypes.REMOVE_FROM_CART,
+        type: actionTypes.DECREASE_QUANTITY,
         payload: {
             id: data.id,
             price: data.price
@@ -29,19 +28,15 @@ export const removeFromCart = (data) => {
         data
     }
 }
-
-/* export const adjustQuantity = (itemId, value) => {
+export const removeFromCart = (data) => {
+    console.log('REMOVE_FROM_CART action called ' + data);
     return {
-        type: actionTypes.ADJUST_QUANTITY,
+        type: actionTypes.REMOVE_FROM_CART,
         payload: {
-            id: itemId,
-            quantity: value
-        }
+            id: data.id,
+
+        },
+
     }
 }
-export const loadItems = (item) => {
-    return {
-        type: actionTypes.LOAD_CURRENT_ITEM,
-        payload: item
-    }
-} */
+

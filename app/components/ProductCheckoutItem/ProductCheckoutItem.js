@@ -7,7 +7,7 @@ import { Icon } from 'react-native-elements';
 // import redux hook
 import { useDispatch, useSelector } from 'react-redux';
 //import action
-import { addToCart, removeFromCart } from '../../redux/Cart/action'
+import { addToCart, removeFromCart, decreaseQuantity } from '../../redux/Cart/action'
 
 const ProductItem = ({ product }) => {
     /* const [Quantity, setQuantity] = useState(1);
@@ -27,7 +27,7 @@ const ProductItem = ({ product }) => {
             <Text numberOfLines={1} style={styles.productItemName}>{product.name}</Text>
             <View style={styles.manageQuantity}>
                 <Icon
-                    onPress={() => dispatch(removeFromCart(product))}
+                    onPress={() => dispatch(decreaseQuantity(product))}
                     name='minus'
                     type='feather'
                     color={Colors.red}
@@ -46,6 +46,15 @@ const ProductItem = ({ product }) => {
                 />
             </View>
             <Text style={styles.productItemPrice}>$ {product.totalPrice}</Text>
+            <Icon
+                onPress={() => dispatch(removeFromCart(product))}
+
+                name='cross'
+                type='entypo'
+                color={Colors.red}
+                size={30}
+
+            />
 
 
 
@@ -74,7 +83,7 @@ const styles = StyleSheet.create({
 
     },
     manageQuantity: {
-        width: '30%',
+        width: '40%',
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-around',
@@ -86,7 +95,7 @@ const styles = StyleSheet.create({
         color: Colors.secondaryText,
     },
     productItemPrice: {
-        width: '30%',
+        width: '20%',
         textAlign: "right",
         fontSize: 17,
         color: Colors.secondaryText,

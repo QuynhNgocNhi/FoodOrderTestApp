@@ -1,4 +1,4 @@
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put, takeLatest } from 'redux-saga/effects';
 import { GET_PRODUCT_LIST, SET_PRODUCT_LIST } from './type';
 //import API
 import { getMasterDataApi } from '../../services/api'
@@ -8,5 +8,5 @@ function* getProductList() {
     yield put({ type: SET_PRODUCT_LIST, data })
 }
 export default function* productSaga() {
-    yield takeEvery(GET_PRODUCT_LIST, getProductList);
+    yield takeLatest(GET_PRODUCT_LIST, getProductList);
 }

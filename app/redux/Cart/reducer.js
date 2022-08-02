@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, ADJUST_QUANTITY, LOAD_CURRENT_ITEM } from './type';
+import { ADD_TO_CART, REMOVE_FROM_CART, DECREASE_QUANTITY } from './type';
 
 const INITIAL_STATE = {
 
@@ -9,10 +9,9 @@ const INITIAL_STATE = {
 };
 // pass action data to reducer
 export const cartData = (state = INITIAL_STATE, action) => {
-    console.log('cart ' + state.cart)
+
     switch (action.type) {
         case ADD_TO_CART:
-            console.log('ADD_TO_CART reducer called ', action.payload.id);
             //get the item data 
             const item = action.data;
             // check if Item is in the cart
@@ -24,11 +23,8 @@ export const cartData = (state = INITIAL_STATE, action) => {
                 totalCount: state.totalCount + 1,
                 totalAmount: state.totalAmount + action.payload.price
             };
-        //if u want to count all of every data
-        case REMOVE_FROM_CART:
-            //console.log('REMOVE_FROM_CART reducer', action.data);
-            //data = data.splice(data.indexOf(action.data.id), 1);
-            //data.length = data.length ? data.length - 1 : [];
+
+        case DECREASE_QUANTITY:
             //check if quantity > 1
             const quantityAvailable = state.cart.find((item) => (item.id === action.payload.id && item.quantity > 1) ? true : false);
 
@@ -38,6 +34,16 @@ export const cartData = (state = INITIAL_STATE, action) => {
                 currentItem: quantityAvailable ? state.currentItem : state.currentItem - 1,
                 totalCount: state.totalCount - 1,
                 totalAmount: state.totalAmount - action.payload.price
+            };
+
+        case REMOVE_FROM_CART:
+            const currentProduct = state.cart.find((item) => item.id === action.payload.id)
+            return {
+                ...state,
+                cart: state.cart.filter((item) => item.id !== action.payload.id),
+                currentItem: state.currentItem - 1,
+                totalCount: state.totalCount - currentProduct.quantity,
+                totalAmount: state.totalAmount - currentProduct.totalPrice
             };
 
         default:
