@@ -10,16 +10,22 @@ import Colors from '../../theme/colors';
 import CustomSwitch from '../../components/Category/CategoryList'
 import ProductList from '../../components/Product/ProductList'
 import CartButtonDetail from '../../components/CartButton/CartButtonDetail';
-
+import {
+    Placeholder,
+    PlaceholderMedia,
+    PlaceholderLine,
+    Loader
+} from "rn-placeholder";
 //import action
 import { fetchData } from '../../redux/Product/action'
 
 // import redux hook
 import { useSelector } from 'react-redux';
+// import redux hook
+import { connect } from 'react-redux';
 
 function Menu() {
 
-    const [loading, setLoading] = useState(false)
     const [productList, setProductList] = useState([])
     const data = useSelector((state) => state.productData);
 
@@ -30,16 +36,18 @@ function Menu() {
     //console.log("productListSaga in menuscreen" + productListSaga)
     const dispatch = useDispatch()
     const setProductData = () => {
-        if (data.length > 0) {
-            setCategoryTab(data[0].id)
-            setProductList(data[0].items)
+        if (data.products.length > 0) {
+            setCategoryTab(data.products[0].id)
+            setProductList(data.products[0].items)
         }
 
     }
 
 
     useEffect(() => {
+
         dispatch(fetchData())
+
     }, [])
     useEffect(() => {
         setProductData()
@@ -48,15 +56,23 @@ function Menu() {
 
     const onSelectSwitch = value => {
         setCategoryTab(value);
-        currentProductList = data.find(obj => {
+        currentProductList = data.products.find(obj => {
             return obj.id === value;
         })
         setProductList(currentProductList.items);
     };
 
-    if (loading) {
+    if (data.showLoading) {
         return (<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <ActivityIndicator animating />
+            <Placeholder
+                Animation={Loader}
+                Left={PlaceholderMedia}
+                Right={PlaceholderMedia}
+            >
+                <PlaceholderLine width={80} />
+                <PlaceholderLine />
+                <PlaceholderLine width={30} />
+            </Placeholder>
         </View>)
     }
     return (
@@ -66,7 +82,7 @@ function Menu() {
                     <View style={styles.categoryList}>
                         <CustomSwitch
                             selectionMode={CategoryTab}
-                            category={data}
+                            category={data.products}
                             onSelectSwitch={onSelectSwitch}
                         />
 
