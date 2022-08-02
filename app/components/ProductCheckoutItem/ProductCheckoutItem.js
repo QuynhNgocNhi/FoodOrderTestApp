@@ -19,12 +19,7 @@ const ProductItem = ({ product }) => {
     } */
     const cartDetail = useSelector((state) => state.cartData);
     const dispatch = useDispatch()
-    const productType = {
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image
-    }
+
     return (
 
         <View style={styles.productItemContainer}>
@@ -32,16 +27,16 @@ const ProductItem = ({ product }) => {
             <Text numberOfLines={1} style={styles.productItemName}>{product.name}</Text>
             <View style={styles.manageQuantity}>
                 <Icon
-                    onPress={() => dispatch(removeFromCart(productType.id))}
+                    onPress={() => dispatch(removeFromCart(product))}
                     name='minus'
                     type='feather'
                     color={Colors.red}
                     size={30}
 
                 />
-                <Text style={styles.productItemQuantity}>1</Text>
+                <Text style={styles.productItemQuantity}>{product.quantity}</Text>
                 <Icon
-                    onPress={() => dispatch(addToCart(productType.id))}
+                    onPress={() => dispatch(addToCart(product))}
 
                     name='plus'
                     type='feather'
@@ -50,7 +45,7 @@ const ProductItem = ({ product }) => {
 
                 />
             </View>
-            <Text style={styles.productItemPrice}>$ 47</Text>
+            <Text style={styles.productItemPrice}>$ {product.totalPrice}</Text>
 
 
 

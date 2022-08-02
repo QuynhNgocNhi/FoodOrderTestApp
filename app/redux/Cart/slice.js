@@ -1,37 +1,20 @@
-/* import * as actionTypes from './type';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    products: [],
-    cart: [],
-    currentCart: null
+    cartItems: [],
+    totalAmount: 0,
+    totalCount: 0
 };
-const cartSlice = createSlice({
+const cartData = createSlice({
     name: 'cart',
-    initialState: initialState,
-    reducers: {
-        addProduct: (state, action) => {
-            console.log("addProduct")
-            state.ids.push(action.payload.id);
+    initialState,
+    reducer: {
+        addToCart(state, action) {
+            console.log('add to cart reducer called');
+            state.cartItems.push(action.payload);
         },
-        removeProduct: (state, action) => {
-            //remove item = splice 
-
-            state.ids.splice(state.ids.indexOf(action.payload.id), 1);
-        }
-    }
+    },
 });
-const { actions, reducer } = cartSlice;
+export const { addToCart } = cartData.actions;
 
-export const {
-    addProduct,
-    removeProduct
-
-
-} = actions;
- */
-
-
-
-
-export default reducer;
+export default cartData.reducer;

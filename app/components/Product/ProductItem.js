@@ -8,17 +8,17 @@ import { addToCart } from '../../redux/Cart/action'
 
 const ProductItem = ({ product }) => {
     const dispatch = useDispatch()
-    const productType = {
+    /* const productType = {
         id: product.id,
         name: product.name,
         price: product.price,
         image: product.image
-    }
+    } */
     return (
 
         <View style={styles.productItemContainer}>
             <TouchableOpacity
-                onPress={() => dispatch(addToCart(productType))}
+                onPress={() => dispatch(addToCart(product))}
             >
                 <View style={styles.productItem}>
 

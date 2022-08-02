@@ -13,11 +13,12 @@ import CartButton from '../../components/CartButton/CartButton';
 import ProductCheckoutItem from '../../components/ProductCheckoutItem/ProductCheckoutItem'
 
 // import redux hook
-import { useSelector } from 'react-redux';
+import { useSelector, connect } from 'react-redux';
 
-function Cart() {
-    const [Products, setProducts] = useState(sample_data[1].items)
-    const cartDetail = useSelector((state) => state.cartData);
+const Cart = ({ cart, totalCount, totalAmount }) => {
+    //const [cartDetail, setProducts] = useState(sample_data[1].items)
+    //const cartDetail = useSelector((state) => state.cartData);
+    //console.log("cartDetail   " + cartDetail);
     return (
         <SafeAreaProvider>
             <SafeAreaView style={styles.screenContainer}>
@@ -30,9 +31,17 @@ function Cart() {
                         </View>
                         <View style={styles.Hairline} />
                         <View style={styles.CheckoutList}>
-                            <FlatList
+                            {cart.map(item => <TouchableOpacity
+                                activeOpacity={1}
+                                key={item.id}
+                            >
+                                <ProductCheckoutItem
+                                    product={item}
+                                />
+                            </TouchableOpacity>)}
+                            {/* <FlatList
 
-                                data={Products}
+                                data={cartDetail}
                                 showsHorizontalScrollIndicator={false}
                                 alwaysBounceHorizontal={false}
                                 keyExtractor={(item, index) => index.toString()}
@@ -45,15 +54,17 @@ function Cart() {
                                         />
                                     </TouchableOpacity>
                                 )}
-                            />
+                            /> */}
                         </View>
                         <View style={styles.Hairline} />
 
                         <View style={styles.bottomHeadline}>
                             <Text style={styles.Headline}>Total</Text>
-                            <Text style={styles.Headline}>{cartDetail.length}</Text>
-                            <Text style={styles.Headline}>$ 57</Text>
+                            <Text style={styles.Headline}>{totalCount}</Text>
+                            <Text style={styles.Headline}>$ {totalAmount}</Text>
                         </View>
+                        <Text style={styles.Headline}></Text>
+
                     </View>
 
                     <View style={styles.cartButton}>
@@ -63,7 +74,7 @@ function Cart() {
             </SafeAreaView>
         </SafeAreaProvider>
     );
-}
+};
 const styles = StyleSheet.create({
     screenContainer: {
         flex: 1,
@@ -110,4 +121,13 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
     }
 });
-export default Cart;
+
+const mapStateToProps = state => {
+    return {
+        cart: state.cartData.cart,
+        totalCount: state.cartData.totalCount,
+        totalAmount: state.cartData.totalAmount
+    }
+}
+
+export default connect(mapStateToProps)(Cart);
