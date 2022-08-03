@@ -46,20 +46,20 @@ export const cartData = (state = INITIAL_STATE, action) => {
 
             };
 
-        case DECREASE_QUANTITY:
+        case DECREASE_QUANTITY: {
             //check if quantity > 1
             //const quantityAvailable = state.cart.find((item) => (item.id === action.payload.id && item.quantity > 1) ? true : false);
-            const index1 = state.cart.findIndex((item) => item.id === action.payload.id);
-            const newCart1 = [...state.cart]
-            let newCurrentItem1 = state.currentItem;
-            if (newCart1[index1].quantity > 1) {
-                newCart1[index1].quantity -= 1
-                newCart1[index1].totalPrice -= action.payload.price
+            const index = state.cart.findIndex((item) => item.id === action.payload.id);
+            const newCart = [...state.cart]
+            let newCurrentItem = state.currentItem;
+            if (newCart[index].quantity > 1) {
+                newCart[index].quantity -= 1
+                newCart[index].totalPrice -= action.payload.price
 
             } else {
                 //removeFromCart
-                newCurrentItem1 -= 1
-                newCart1.splice(index1, 1)
+                newCurrentItem -= 1
+                newCart.splice(index, 1)
 
             }
 
@@ -69,26 +69,27 @@ export const cartData = (state = INITIAL_STATE, action) => {
                 currentItem: quantityAvailable ? state.currentItem : state.currentItem - 1,
                 totalCount: state.totalCount - 1,
                 totalAmount: state.totalAmount - action.payload.price */
-                cart: newCart1,
-                currentItem: newCurrentItem1,
+                cart: newCart,
+                currentItem: newCurrentItem,
                 totalCount: state.totalCount - 1,
                 totalAmount: state.totalAmount - action.payload.price
 
             };
-
-        case REMOVE_FROM_CART:
+        }
+        case REMOVE_FROM_CART: {
             //const currentProduct = state.cart.find((item) => item.id === action.payload.id)
-            const index2 = state.cart.findIndex((item) => item.id === action.payload.id);
-            const newCart2 = [...state.cart]
-            const currentProduct = newCart2[index2];
-            newCart2.splice(index2, 1)
+            const index = state.cart.findIndex((item) => item.id === action.payload.id);
+            const newCart = [...state.cart]
+            const currentProduct = newCart[index];
+            newCart.splice(index, 1)
             return {
                 ...state,
-                cart: newCart2,
+                cart: newCart,
                 currentItem: state.currentItem - 1,
                 totalCount: state.totalCount - currentProduct.quantity,
                 totalAmount: state.totalAmount - currentProduct.totalPrice
             };
+        }
 
         default:
             return state;
