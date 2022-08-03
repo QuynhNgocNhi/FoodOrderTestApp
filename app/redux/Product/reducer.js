@@ -1,9 +1,10 @@
-import { SET_PRODUCT_LIST, SHOW_LOADING, HIDE_LOADING } from './type';
+import { SET_PRODUCT_LIST, SHOW_LOADING, HIDE_LOADING, PRODUCTS_REQUEST_FAILED } from './type';
 // pass action data to reducer
 const INITIAL_STATE = {
 
     products: [],
     showLoading: false,
+    error: null,
 };
 export const productData = (state = INITIAL_STATE, action) => {
     switch (action.type) {
@@ -23,6 +24,11 @@ export const productData = (state = INITIAL_STATE, action) => {
                 ...state,
                 showLoading: false
             };
+        case PRODUCTS_REQUEST_FAILED:
+            return {
+                ...state,
+                error: action.error
+            }
         case SET_PRODUCT_LIST:
             return {
                 ...state,

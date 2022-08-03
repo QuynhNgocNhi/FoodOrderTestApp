@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { SafeAreaView, StyleSheet, View, ActivityIndicator } from 'react-native';
+import { SafeAreaView, StyleSheet, View, ActivityIndicator, Alert } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 // import colors
@@ -26,6 +26,7 @@ import { connect } from 'react-redux';
 
 function Menu() {
 
+    const dispatch = useDispatch()
     const [productList, setProductList] = useState([])
     const data = useSelector((state) => state.productData);
 
@@ -34,8 +35,9 @@ function Menu() {
 
     //const productListSaga = useSelector((state) => state.productData);
     //console.log("productListSaga in menuscreen" + productListSaga)
-    const dispatch = useDispatch()
-    const setProductData = () => {
+
+    const setProductData = (data) => {
+        console.log(data.products);
         if (data.products.length > 0) {
             setCategoryTab(data.products[0].id)
             setProductList(data.products[0].items)
@@ -43,34 +45,58 @@ function Menu() {
 
     }
 
+    const onError = (messageError) => {
+        Alert.alert(
+            "",
+            messageError || "Hệ thống đang lỗi, vui lòng thử lại sau!",
+            [
+                {
+                    text: "OK",
+                    style: "cancel"
+                }
+            ]
+        );
+
+    }
+
 
     useEffect(() => {
 
-        dispatch(fetchData())
+        dispatch(fetchData({ onError }))
 
     }, [])
     useEffect(() => {
-        setProductData()
+        setProductData(data)
     }, [data])
 
 
     const onSelectSwitch = value => {
         setCategoryTab(value);
-        currentProductList = data.products.find(obj => {
-            return obj.id === value;
-        })
+        currentProductList = data.products.find(obj =>
+            obj.id === value
+        )
         setProductList(currentProductList.items);
     };
 
     if (data.showLoading) {
         return (<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Placeholder
-                Animation={Loader}
-                Left={PlaceholderMedia}
-                Right={PlaceholderMedia}
             >
                 <PlaceholderLine width={80} />
                 <PlaceholderLine />
+                <PlaceholderLine width={30} />
+                <PlaceholderLine width={30} />
+                <PlaceholderLine width={30} />
+                <PlaceholderLine width={80} />
+                <PlaceholderLine width={80} />
+                <PlaceholderLine width={30} />
+                <PlaceholderLine width={30} />
+                <PlaceholderLine width={80} />
+                <PlaceholderLine width={80} />
+                <PlaceholderLine width={30} />
+                <PlaceholderLine width={30} />
+                <PlaceholderLine width={30} />
+                <PlaceholderLine width={30} />
                 <PlaceholderLine width={30} />
             </Placeholder>
         </View>)
