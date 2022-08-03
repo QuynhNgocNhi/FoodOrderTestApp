@@ -2,20 +2,21 @@ import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { TouchableOpacity, FlatList, SafeAreaView, StyleSheet, View, Text } from 'react-native';
 
-// import colors
-import Colors from '../../theme/colors';
-
-//import components
+// Components
 import CartButton from '../../components/CartButton/CartButton';
 import ProductCheckoutItem from '../../components/ProductCheckoutItem/ProductCheckoutItem';
 
-// import redux hook
+// Redux
 import { connect } from 'react-redux';
+
+// Styles
+import Colors from '../../theme/colors';
 
 const Cart = ({ cart, totalCount, totalAmount }) => {
     //const [cartDetail, setProducts] = useState(sample_data[1].items)
     //const cartDetail = useSelector((state) => state.cartData);
     //console.log("cartDetail   " + cartDetail);
+    console.log({ cart })
     return (
         <SafeAreaProvider>
             <SafeAreaView style={styles.screenContainer}>
